@@ -1,0 +1,35 @@
+.form-horizontal {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.border {
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  width: 600px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.bar {
+  margin-bottom: 1em;
+  border: 2px solid #f55;
+}
+
+button {
+  margin-top: 1.5em;
+}
