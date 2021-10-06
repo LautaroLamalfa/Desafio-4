@@ -1,13 +1,24 @@
 const express = require('express');
+const app = express();
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
 const router = express.Router()
 
+const arr = [
+    {
+        title: "Block de Dibujo",
+        price: 95,
+        thumnail: "link"
+    }
+]
+
 router.get("/", (req, res) => {
-    res.send("Hola a todos. Bienvenido a mi pagina")
+    res.send(arr)
 })
 
-router.post("/", (req, res) => {
+router.post("/productos", (req, res) => {
 
     console.log(req.body);
     let {title, price, thumbnail} = req.body;
