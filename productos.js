@@ -14,7 +14,7 @@ const arr = [
     }
 ]
 
-router.get("/", (req, res) => {
+router.get("/productos", (req, res) => {
     res.send(arr)
 })
 
