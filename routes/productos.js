@@ -42,23 +42,23 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     console.log(req.body);
     let { titulo, precio, thumbnail } = req.body;
-    let newObj = { 
-        titulo,
-        precio,
-        thumbnail,
+    let newObj = {
+      titulo,
+      precio,
+      thumbnail,
     };
-
+  
     async function saveProd() {
-        try {
-            await productos.save(newObj);
-            res.send(newObj);
-        } catch (err) {
-            throw Error(" Error al post productos")
-        }
+      try {
+        await productos.save(newObj);
+        res.send(newObj);
+        
+      } catch (error) {
+        throw Error("Error al post productos");
+      }
     }
-
-    saveProd()
-});
+    saveProd();
+  });
 
 router.put("/:id", (req, res) => {
     let { titulo, precio, thumbnail } = req.body;

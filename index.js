@@ -7,7 +7,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + "/public"));
 
-app.use("/productos", productos)
 app.use("/api/products", productosRutas);
 
 
@@ -19,3 +18,4 @@ app.get("/", (req,res) => {
 app.listen(8080, () => {
     console.log("Servidor corriendo 👍");
 })
+
