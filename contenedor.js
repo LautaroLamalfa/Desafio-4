@@ -40,7 +40,7 @@ class Contenedor {
             }
             datos.push(newProduct);
 
-            await this.write(datos, "Producto Agregado");
+            await this.write(datos);
         } catch (error) {
             res.status(300).json({ error: "Error al guardar"});
         }

@@ -39,7 +39,7 @@ router.get("/:id", (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     console.log(req.body);
     let { nombre, precio, thumbnail } = req.body;
     let newObj = {
