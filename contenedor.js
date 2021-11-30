@@ -11,7 +11,7 @@ class Contenedor {
             let data = await fs.promises.readFile("./" + this.name, "utf8");
             return data
         } catch (error) {
-            throw Error ("Error reading file " + this.name)
+            res.status(300).json({ error: "Error al leer" + this.name });
         }
     }
 
@@ -19,7 +19,7 @@ class Contenedor {
         try {
             await fs.promises.writeFile("./" + this.name, JSON.stringify(datos, null, 2), "utf8");       
         } catch (error) {
-            throw Error ("Error writing file " + this.name)
+            res.status(300).json({ error: "Error al escribir en" + this.name });
         }
     }
 
@@ -28,7 +28,7 @@ class Contenedor {
             let newId = 1
             let newProduct = {}
 
-            let data = await fs.promises.readFile("./" + this.name, "utf-8");
+            let data = await fs.promises.readFile("./"+this.name, "utf-8");
             let datos = [JSON.parse(data)];
 
             if(!data) {
@@ -42,7 +42,7 @@ class Contenedor {
 
             await this.write(datos, "Producto Agregado");
         } catch (error) {
-            throw Error ("Error saving")
+            res.status(300).json({ error: "Error al guardar"});
         }
     }
 
@@ -55,7 +55,7 @@ class Contenedor {
             return result
 
         } catch (error) {
-            throw Error ("Error getting Id")
+            res.status(300).json({ error: "Error al conseguir el id"});
         }
     }
 
@@ -66,7 +66,7 @@ class Contenedor {
 
             return datos;
         } catch (error) {
-            throw Error ("Error getting all products")
+            res.status(300).json({ error: "Error al conseguir todos los productos"});
         }
     }
 
@@ -85,7 +85,7 @@ class Contenedor {
                 return[]
             }
         } catch (error) {
-                throw Error ("Error deleting by Id")
+            res.status(300).json({ error: "Error al borrar por id"});
             }
         }
 
@@ -94,7 +94,7 @@ class Contenedor {
             let data = [];
             await this.write(data, "Productos eliminados")
         } catch (error) {
-            throw Error ("Error deleting all products")
+            res.status(300).json({ error: "Error al borrar todos los productos"});
         }
     }
 }
