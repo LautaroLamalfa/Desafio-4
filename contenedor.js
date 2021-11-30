@@ -29,7 +29,7 @@ class Contenedor {
             let newProduct = {}
 
             let data = await fs.promises.readFile("./" + this.name, "utf-8");
-            let datos = JSON.parse(data);
+            let datos = [JSON.parse(data)];
 
             if(!data) {
                 product.id = newId;
