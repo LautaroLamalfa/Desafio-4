@@ -13,8 +13,8 @@ router.get('/', (req, res) => {
         try {
             let aux = await productos.getAll();
             res.send(aux);
-        } catch (err) {
-            throw Error("Error al conseguir productos")
+        } catch (error) {
+            res.status(300).json({ error: "Error al conseguir productos"});
         }
     }
 
@@ -32,7 +32,7 @@ router.get("/:id", (req, res) => {
                 res.send(oneId);
             }
         } catch (err) {
-            throw Error("Error al conseguir producto el producto")
+            res.status(300).json({ error: "Error al conseguir productos"});
         }
     }
     getTheId();
@@ -41,9 +41,9 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     console.log(req.body);
-    let { titulo, precio, thumbnail } = req.body;
+    let { nombre, precio, thumbnail } = req.body;
     let newObj = {
-      titulo,
+      nombre,
       precio,
       thumbnail,
     };
@@ -54,14 +54,14 @@ router.post("/", (req, res) => {
         res.send(newObj);
         
       } catch (error) {
-        throw Error("Error al post productos");
+        res.status(300).json({ error: "Error al subir productos" });
       }
     }
     saveProd();
   });
 
 router.put("/:id", (req, res) => {
-    let { titulo, precio, thumbnail } = req.body;
+    let { nombre, precio, thumbnail } = req.body;
 
     async function modProd() {
         try {
@@ -71,7 +71,7 @@ router.put("/:id", (req, res) => {
                 res.send({ message: "Product not found"});
             } else {
                 prodMod = {
-                    titulo,
+                    nombre,
                     precio,
                     thumbnail,
                     id : parseInt(req.params.id)
@@ -80,14 +80,14 @@ router.put("/:id", (req, res) => {
                 let todosProd = await productos.read();
                 todosProd = (JSON.parse(todosProd, null, 2));
                 let auxId = parseInt(req.params.id) - 1;
-                todosProd.splice(auxId, 1, prodMod);
+                todosProd.slice(auxId, 1, prodMod);
 
                 await productos.write(todosProd, "Producto modificado correctamente")
 
                 res.send(todosProd)
             } 
         } catch (error) {
-            throw Error ("Error al modificar productos")
+            res.status(300).json({ error: "Error al modificar productos" });
         }
     }
     modProd()
@@ -105,7 +105,7 @@ router.delete("/:id", (req, res) => {
                 res.send(await productos.getAll())
             }
         } catch (error) {
-            throw Error ("Error deleting Id")
+            res.status(300).json({ error: "Error al eliminar productos" });
         }
     }
 

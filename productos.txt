@@ -1,19 +1,19 @@
 [
     {
         "id":1
-        titulo: "Block de Dibujo",
+        nombre: "Block de Dibujo",
         precio: 135,
         thumbnail: "link"
     },
     {
         "id":2
-        titulo: "Barbijos",
+        nombre: "Barbijos",
         precio: 75,
         thumbnail: "link"    
     },
     {
         "id":3
-        titulo: "Carpetas",
+        nombre: "Carpetas",
         precio: 55,
         thumbnail: "link"
     }
