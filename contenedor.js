@@ -8,93 +8,106 @@ class Contenedor {
 
     async read() {
         try {
-            let data = await fs.promises.readFile("./" + this.name, "utf8");
-            return data
+            let data = await fs.promises.readFile("./" + this.name, "utf-8");
+            return data;
+            
         } catch (error) {
             res.status(300).json({ error: "Error al leer" + this.name });
         }
     }
 
-    async write(datos) {
+    async write(datos, msg) {
         try {
-            await fs.promises.writeFile("./" + this.name, JSON.stringify(datos, null, 2), "utf8");       
+            await fs.promises.writeFile("./" + this.name, JSON.stringify(datos, null, 2));
+            console.log(msg);
         } catch (error) {
             res.status(300).json({ error: "Error al escribir en" + this.name });
         }
     }
 
-    async save (product) {
-        try {
-            let newId = 1
-            let newProduct = {}
 
-            let data = await fs.promises.readFile("./"+this.name, "utf-8");
-            let datos = [JSON.parse(data)];
-
+    async save(product) {
+        try{
+            let newId = 1;
+            let newProduct = {};
+    
+            let data = await this.read();
+            let datos = JSON.parse(data);
+    
             if(!data) {
                 product.id = newId;
                 newProduct = [product];
             } else {
-                product.id = datos [datos.length - 1].id + 1;
+                product.id = datos[datos.length - 1].id + 1;
                 newProduct = product;
             }
             datos.push(newProduct);
-
-            await this.write(datos);
-        } catch (error) {
+    
+            await this.write(datos, "Producto agregado correctamente");
+        }
+        catch(error){
             res.status(300).json({ error: "Error al guardar"});
         }
+
     }
 
+
     async getById(num) {
-        try {
+        try{
             let data = await this.read();
             let datos = JSON.parse(data);
-
-            let result = datos.filter( product => product.id === num);
-            return result
-
-        } catch (error) {
-            res.status(300).json({ error: "Error al conseguir el id"});
+    
+            let result = datos.filter( product => product.id == num);
+            return result;
         }
+        catch(error){
+                res.status(300).json({ error: "Error al conseguir el producto"});
+        }
+
     }
 
     async getAll() {
-        try {
+         try{
             let data = await this.read();
             let datos = JSON.parse(data);
-
+    
             return datos;
-        } catch (error) {
-            res.status(300).json({ error: "Error al conseguir todos los productos"});
         }
+        catch(error){
+            res.status(300).json({ error: "Error al guardar el producto"});
+        };
+
     }
 
     async deleteById(num) {
-        try {
+        try{
             let data = await this.read();
             let datos = JSON.parse(data);
-            let result = datos.find( product => product.id === num);
-
-            if(result) {
-                let index = datos.indexOf(result)
-                datos.splice(index, 1)
-                await this.write(datos, `Producto con ID ${num} eliminado`);
+    
+            let product = datos.find( product => product.id == num);
+            
+            if(product) {
+                let index = datos.indexOf(product);
+                datos.splice(index, 1);
+                await this.write(datos, `Producto con ID: ${num} eliminado correctamente`);
             } else {
-                console.log(` El producto ${num} no existe`);
-                return[]
-            }
-        } catch (error) {
-            res.status(300).json({ error: "Error al borrar por id"});
+                console.log(`Producto con ID: ${num} no existe`);
+                return [];
             }
         }
+        catch(error){
+            res.status(300).json({ error: "Error en modificar el producto"});
+        }
 
-    async deleteALL() {
-        try {
+    }
+
+    async deleteAll() {
+        try{
             let data = [];
-            await this.write(data, "Productos eliminados")
-        } catch (error) {
-            res.status(300).json({ error: "Error al borrar todos los productos"});
+            await this.write(data, "Todos los productos eliminados");
+        }
+        catch(error){
+            res.status(300).json({ error: "Error al eliminar el producto"});
         }
     }
 }

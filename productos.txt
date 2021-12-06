@@ -1,20 +1,42 @@
 [
-    {
-        "id":1
-        nombre: "Block de Dibujo",
-        precio: 135,
-        thumbnail: "link"
-    },
-    {
-        "id":2
-        nombre: "Barbijos",
-        precio: 75,
-        thumbnail: "link"    
-    },
-    {
-        "id":3
-        nombre: "Carpetas",
-        precio: 55,
-        thumbnail: "link"
-    }
+  {
+    "titulo": "Escuadra",
+    "precio": 123.45,
+    "thumbnail": "urlImagen",
+    "id": 1
+  },
+  {
+    "titulo": "Calculadora",
+    "precio": 234.56,
+    "thumbnail": "urlImagen",
+    "id": 2
+  },
+  {
+    "titulo": "Globo Terraqueo",
+    "precio": 345.67,
+    "thumbnail": "urlImagen",
+    "id": 3
+  },
+  {
+    "precio": "36",
+    "thumbnail": "https://m.media-amazon.com/images/I/518D4OG9mlL._AC_SX425_.jpg",
+    "id": 4
+  },
+  {
+    "precio": "10",
+    "thumbnail": "https://m.media-amazon.com/images/I/518D4OG9mlL._AC_SX425_.jpg",
+    "id": 5
+  },
+  {
+    "titulo": "panuelos",
+    "precio": "36",
+    "thumbnail": "url link",
+    "id": 6
+  },
+  {
+    "titulo": "panuelos",
+    "precio": "36",
+    "thumbnail": "urlImagen",
+    "id": 7
+  }
 ]
